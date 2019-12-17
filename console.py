@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """This is the console for AirBnB"""
 import cmd
 from models import storage
@@ -43,6 +43,15 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
+            for item in my_list[1:]:
+                parms = item.split("=")
+                parms[1] = parms[1].replace('_', ' ')
+                parms[1] = parms[1].replace('"', '')
+                try:
+                    parms_1 = eval(parms[1])
+                except:
+                    parms_1 = parms[1]
+                setattr(obj, parms[0], parms_1)
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
