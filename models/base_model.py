@@ -67,7 +67,10 @@ class BaseModel:
         my_dict["__class__"] = str(type(self).__name__)
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
-        if my_dict["_sa_instance_state"]:
+
+        keys = my_dict.keys()
+
+        if "_sa_instance_state" in keys:
             del my_dict["_sa_instance_state"]
         return my_dict
 
