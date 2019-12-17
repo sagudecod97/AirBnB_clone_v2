@@ -3,6 +3,7 @@
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker
 from os import environ
+from models.base_model import BaseModel, Base
 
 
 class DBStorage:
@@ -27,6 +28,6 @@ class DBStorage:
         session = Session()
         hbnb_env = environ.get('HBNB_ENV')
         if hbnb_env == 'test':
-            txt = text("DROP ALL tables;")
-            
+            Base.metadata.drop_all(self.__engine)
+
 
