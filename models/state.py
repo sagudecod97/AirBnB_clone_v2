@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from os import environ
+import models
 
 
 class State(BaseModel, Base):
@@ -18,7 +19,7 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             """Return all cities related with the state"""
-            all_cities = storage.all(City)
+            all_cities = models.storage.all("City")
             own_city = []
             for value in all_cities.values():
                 if self.id == value.state_id:

@@ -18,4 +18,4 @@ class City(BaseModel, Base):
     glb_storage = environ.get('HBNB_TYPE_STORAGE')
     if glb_storage == 'db':
         state = relationship("State", back_populates='cities',
-        cascade="all, delete, delete-orphan")
+        cascade="all, delete, delete-orphan", single_parent=True)
