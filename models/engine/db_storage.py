@@ -17,7 +17,7 @@ class DBStorage:
     __engine = None
     __session = None
 
-    def __init___(self):
+    def __init__(self):
         user = environ.get('HBNB_MYSQL_USER')
         pwd = environ.get('HBNB_MYSQL_PWD')
         hst = environ.get('HBNB_MYSQL_HOST')
