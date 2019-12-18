@@ -3,8 +3,10 @@
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker
 from os import environ
+from models.city import City
+from models.state import State
 from models.base_model import BaseModel, Base
-
+from sqlalchemy.orm import scoped_session
 
 class DBStorage:
     """ Class to manage the storage in th DataBase
@@ -23,9 +25,9 @@ class DBStorage:
 
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'.
             format(user, pwd, hst, db), pool_pre_ping=True)
-        Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine)
-        self.__session = Session()
+        #Base.metadata.create_all(self.__engine)
+        #Session = sessionmaker(bind=self.__engine)
+        #self.__session = Session()
         hbnb_env = environ.get('HBNB_ENV')
         if hbnb_env == 'test':
             Base.metadata.drop_all(self.__engine)
@@ -64,6 +66,6 @@ class DBStorage:
 
     def reload(self):
         """ create all tables in the database """
-
-
-
+        Base.metadata.create_all(self.__engine)
+        Session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))
+        self.__session = Session()
