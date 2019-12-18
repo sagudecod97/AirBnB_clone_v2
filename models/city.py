@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
+from os import environ
 
 
 class City(BaseModel, Base):
@@ -14,5 +15,7 @@ class City(BaseModel, Base):
     __tablename__ = "cities"
     state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
     name = Column(String(128), nullable=False)
-    state = relationship("State", back_populates='cities',
+    glb_storage = environ.get('HBNB_TYPE_STORAGE')
+    if glb_storage == 'db':
+        state = relationship("State", back_populates='cities',
         cascade="all, delete, delete-orphan")
