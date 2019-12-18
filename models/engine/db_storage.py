@@ -35,7 +35,7 @@ class DBStorage:
     def all(self, cls=None):
         """ Prints all the objects """
 
-        classes = ["City", "State"]
+        classes = ["State", "City"]
         dict_return = {}
 
         if cls is None:
