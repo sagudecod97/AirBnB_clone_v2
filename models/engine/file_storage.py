@@ -25,11 +25,15 @@ class FileStorage:
         Return:
             returns a dictionary of __object
         """
-        """if cls is not None:
+        if cls is not None:
+            new_dict = {}
             for key in self.__objects.keys():
                 key_split = key.split('.')
-                if key_split == cls:
-                    new_dict[]"""
+                if key_split[0] == cls:
+                    new_dict[key] = self.__objects[key]
+            if new_dict['_sa_instance_state']:
+                del new_dict['_sa_instance_state']
+            return new_dict[key]
         return self.__objects
 
     def new(self, obj):
