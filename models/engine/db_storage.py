@@ -5,6 +5,8 @@ from sqlalchemy.orm import sessionmaker
 from os import environ
 from models.city import City
 from models.state import State
+from models.user import User
+from models.place import Place
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import scoped_session
 
@@ -34,13 +36,13 @@ class DBStorage:
     def all(self, cls=None):
         """ Prints all the objects """
 
-        classes = [State, City]
+        classes = [State, City, User]
         dict_return = {}
 
         if cls is None:
             for table_name in classes:
                 for table in self.__session.query(table_name).all():
-                    dict_return["{}.{}".format(table_name.name, table.id)] = table
+                    dict_return["{}.{}".format(table_name.__name__, table.id)] = table
         else:
             for table in self.__session.query(cls).all():
                 dict_return["{}.{}".format(cls.__class__, table.id)] = table.to_dict()

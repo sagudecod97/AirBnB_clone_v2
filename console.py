@@ -11,7 +11,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from shlex import split
-
+from copy import deepcopy
+from os import environ
 
 class HBNBCommand(cmd.Cmd):
     """this class is entry point of the command interpreter
@@ -127,6 +128,7 @@ class HBNBCommand(cmd.Cmd):
         Exceptions:
             NameError: when there is no object taht has the name
         """
+        copy_class = environ.get('HBNB_TYPE_STORAGE')
         objects = storage.all()
         my_list = []
         if not line:
@@ -134,14 +136,14 @@ class HBNBCommand(cmd.Cmd):
                 my_list.append(objects[key])
             print(my_list)
             return
+        if copy_class ==  "db":
+            objects = storage.all()
         try:
             args = line.split(" ")
             if args[0] not in self.all_classes:
                 raise NameError()
             for key in objects:
-                #print("***** KEY: {}".format(key))
                 name = key.split('.')
-                #print("name: {} -- args[0]: {}".format(name[0], args[0]))
                 if name[0] == args[0]:
                     my_list.append(objects[key])
             print(my_list)
