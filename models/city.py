@@ -26,4 +26,4 @@ class City(BaseModel, Base):
                 if self.id == value.state_id:
                     own_city.append(value)
             return own_city"""
-    places = relationship("Place", backref="city_all", cascade="all, delete")
+    places = relationship("Place", backref="cities", cascade="all, delete")
