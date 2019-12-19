@@ -38,7 +38,7 @@ class Place(BaseModel, Base):
         reviews = relationship('Review', backref='places', cascade='all, delete')
     else:
         @property
-        def reviews:
+        def reviews(self):
             """Return all reviews related for a state"""
             all_reviews = models.storage.all("Review")
             own_reviews = []
