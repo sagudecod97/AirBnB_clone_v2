@@ -40,13 +40,10 @@ class DBStorage:
         if cls is None:
             for table_name in classes:
                 for table in self.__session.query(table_name).all():
-                    dict_return["{}.{}".format(table_name, table.id)] = table
+                    dict_return["{}.{}".format(table_name.name, table.id)] = table
         else:
             for table in self.__session.query(cls).all():
-                dict_return["{}.{}".format(cls, table.id)] = table.to_dict()
-
-        #for key,value in dict_return.items():
-         #   print("******* {} *******".format(dict_return[key]))
+                dict_return["{}.{}".format(cls.__class__, table.id)] = table.to_dict()
 
         return dict_return
 

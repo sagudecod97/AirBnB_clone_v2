@@ -139,7 +139,9 @@ class HBNBCommand(cmd.Cmd):
             if args[0] not in self.all_classes:
                 raise NameError()
             for key in objects:
+                #print("***** KEY: {}".format(key))
                 name = key.split('.')
+                #print("name: {} -- args[0]: {}".format(name[0], args[0]))
                 if name[0] == args[0]:
                     my_list.append(objects[key])
             print(my_list)
