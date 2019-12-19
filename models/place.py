@@ -33,3 +33,16 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     amenity_ids = []
+    gbl_storage = environ.get('HBNB_TYPE_STORAGE')
+    if gbl_storage == 'db':
+        reviews = relationship('Review', backref='places', cascade='all, delete')
+    else:
+        @property
+        def reviews:
+            """Return all reviews related for a state"""
+            all_reviews = models.storage.all("Review")
+            own_reviews = []
+            for value in all_reviews.values():
+                if self.id == value.place_id:
+                    own_reviews.append(value)
+                return own_reviews
