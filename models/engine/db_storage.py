@@ -44,7 +44,7 @@ class DBStorage:
                     dict_return["{}.{}".format(table_name, table.id)] = table
         else:
             for table in self.__session.query(cls).all():
-                dict_return["{}.{}".format(cls, table.id)] = table
+                dict_return["{}.{}".format(cls, table.id)] = table.to_dict()
 
         #for key,value in dict_return.items():
          #   print("******* {} *******".format(dict_return[key]))
