@@ -16,7 +16,6 @@ class City(BaseModel, Base):
     state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
     name = Column(String(128), nullable=False)
     glb_storage = environ.get('HBNB_TYPE_STORAGE')
-    state = relationship('State', backref='cities', cascade="all, delete")
     if glb_storage != 'db':
         @property
         def cities(self):
