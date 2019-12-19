@@ -22,7 +22,6 @@ class DBStorage:
         pwd = environ.get('HBNB_MYSQL_PWD')
         hst = environ.get('HBNB_MYSQL_HOST')
         db = environ.get('HBNB_MYSQL_DB')
-
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'.
             format(user, pwd, hst, db), pool_pre_ping=True)
         #Base.metadata.create_all(self.__engine)
@@ -35,7 +34,7 @@ class DBStorage:
     def all(self, cls=None):
         """ Prints all the objects """
 
-        classes = ["State", "City"]
+        classes = [State, City]
         dict_return = {}
 
         if cls is None:
@@ -67,5 +66,6 @@ class DBStorage:
     def reload(self):
         """ create all tables in the database """
         Base.metadata.create_all(self.__engine)
-        Session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))
+        Session_maker = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(Session_maker)
         self.__session = Session()
