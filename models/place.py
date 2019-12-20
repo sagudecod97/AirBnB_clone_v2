@@ -57,12 +57,12 @@ class Place(BaseModel, Base):
             for value in all_reviews.values():
                 if self.id == value.place_id:
                     own_reviews.append(value)
-                return own_reviews
+            return own_reviews
 
         @property
         def amenities(self):
-            """ Returnreturns the list of Amenity instances """
-            all_amenities = models.storage.all("Amenity")
+            """ Returns the list of Amenity instances """
+            all_amenities = models.storage.all('Amenity')
             own_amenity = []
             for key in all_amenities.keys():
                 key_split = key.split(".")
