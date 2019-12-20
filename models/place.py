@@ -47,7 +47,7 @@ class Place(BaseModel, Base):
     gbl_storage = environ.get('HBNB_TYPE_STORAGE')
     if gbl_storage == 'db':
         reviews = relationship('Review', backref='places', cascade='all, delete')
-        amenities = relationship('Amenity', secondary=place_amenity, viewonly=False, backref='places')
+        amenities = relationship('Amenity', secondary=place_amenity, viewonly=False, backref='places', cascade='all, delete')
     else:
         @property
         def reviews(self):
