@@ -13,7 +13,7 @@ class BaseModel:
     """This class will defines all common attributes/methods
     for other classes
     """
-    id = Column(String(60), nullable=False, primary_key=True)
+    id = Column(String(60),unique=True, nullable=False, primary_key=True)
     created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
@@ -34,7 +34,6 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
                     setattr(self, key, value)
-        else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
 
