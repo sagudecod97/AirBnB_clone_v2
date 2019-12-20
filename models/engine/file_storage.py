@@ -31,7 +31,7 @@ class FileStorage:
         for key in self.__objects.keys():
             key_split = key.split('.')
             if key_split[0] == cls:
-                new_dict[key] = self.__objects[key].to_dict()
+                new_dict[key] = self.__objects[key]
         return new_dict
 
     def new(self, obj):
