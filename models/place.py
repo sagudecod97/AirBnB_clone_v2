@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the place class"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy import Table, Column, Integer, String, Float, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from os import environ
 
@@ -33,9 +33,20 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     amenity_ids = []
+    metadata = Base.metadata
+
+    """This is the association table between place and amenity """
+    place_amenity = Table('place_amenity', metadata,
+        Column('place_id', String(60), ForeignKey('places.id'),
+                primary_key=True, nullable=False),
+        Column('amenity_id', String(69), ForeignKey('amenities.id'),
+                primary_key=True, nullable=False)
+        )
+
     gbl_storage = environ.get('HBNB_TYPE_STORAGE')
     if gbl_storage == 'db':
         reviews = relationship('Review', backref='places', cascade='all, delete')
+        amenities = relationship('Amenity', secondary=place_amenity, viewonly=False, backref='places')
     else:
         @property
         def reviews(self):
@@ -46,3 +57,22 @@ class Place(BaseModel, Base):
                 if self.id == value.place_id:
                     own_reviews.append(value)
                 return own_reviews
+
+        @property
+        def amenities(self):
+            """ Returnreturns the list of Amenity instances """
+            all_amenities = models.storage.all("Amenity")
+            own_amenity = []
+            for key in all_amenities.keys():
+                key_split = key.split(".")
+                if key_split[1] in self.amenity_ids:
+                    own_amenity.append(all_amenities[key])
+            return own_amenity
+
+        @amenities.setter
+        def amenities(self, obj=None):
+            """ Append amenity's id to amenity_ids"""
+            obj_class = obj.__name__
+            if obj is None or obj_class != 'Amenity':
+                return
+            self.amenity_ids.append(obj.id)
