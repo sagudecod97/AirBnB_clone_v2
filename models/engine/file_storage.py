@@ -25,6 +25,7 @@ class FileStorage:
         Return:
             returns a dictionary of __object
         """
+        new_dict = {}
         if cls is None:
             return self.__objects
         for key in self.__objects.keys():
@@ -32,7 +33,7 @@ class FileStorage:
         if key_split[0] == cls:
             new_dict[key] = self.__objects[key].to_dict()
         return new_dict
-       
+
     def new(self, obj):
         """sets __object to given obj
         Args:
