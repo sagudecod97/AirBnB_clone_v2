@@ -73,7 +73,7 @@ class TestConsole(unittest.TestCase):
             self.assertEqual('', f.getvalue())
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                    'Not supported in Data Base mode')
+                     'Not supported in Data Base mode')
     def test_create(self):
         """Test create command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -132,7 +132,7 @@ class TestConsole(unittest.TestCase):
                 "** no instance found **\n", f.getvalue())
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                    'Not supported in Data Base mode')
+                     'Not supported in Data Base mode')
     def test_all(self):
         """Test all command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -176,7 +176,7 @@ class TestConsole(unittest.TestCase):
                 "** value missing **\n", f.getvalue())
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                      'Not supported in Data Base mode')
+                     'Not supported in Data Base mode')
     def test_z_all(self):
         """Test alternate all command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -188,7 +188,7 @@ class TestConsole(unittest.TestCase):
             self.assertEqual("[]\n", f.getvalue())
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                    'Not supported in Data Base mode')
+                     'Not supported in Data Base mode')
     def test_z_count(self):
         """Test count command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -200,7 +200,7 @@ class TestConsole(unittest.TestCase):
             self.assertEqual("0\n", f.getvalue())
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                        'Not supported in Data Base mode')
+                     'Not supported in Data Base mode')
     def test_z_show(self):
         """Test alternate show command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -213,7 +213,7 @@ class TestConsole(unittest.TestCase):
                 "** no instance found **\n", f.getvalue())
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                    'Not supported in Data Base mode')
+                     'Not supported in Data Base mode')
     def test_destroy(self):
         """Test alternate destroy command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -226,7 +226,7 @@ class TestConsole(unittest.TestCase):
                 "** no instance found **\n", f.getvalue())
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                    'Not supported in Data Base mode')
+                     'Not supported in Data Base mode')
     def test_update(self):
         """Test alternate destroy command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
