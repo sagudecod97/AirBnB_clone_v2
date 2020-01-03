@@ -14,7 +14,7 @@ echo "
         </body>
     </html>
 " > /data/web_static/releases/test/index.html
-sudo ln -fsn /data/web_static/releases/test/ /data/web_static/current
+sudo ln -sfn /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 sudo sed -i '35ilocation /hbnb_static/ {' /etc/nginx/sites-available/default
 sudo sed -i '36ialias /data/web_static/current/' /etc/nginx/sites-available/default
