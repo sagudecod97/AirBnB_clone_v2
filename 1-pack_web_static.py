@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+i#!/usr/bin/python3
 from fabric.api import local
 from datetime import datetime
 """
@@ -14,7 +14,7 @@ def do_pack():
         datetime.now().day,
         datetime.now().hour,
         datetime.now().minute,
-        datetime.now().second()
+        datetime.now().second
     ]
     directory = "web_static"
     file_tgz = "{}_{}{}{}{}{}{}.tgz".format(directory,
