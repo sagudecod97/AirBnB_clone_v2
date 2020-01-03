@@ -24,4 +24,9 @@ def do_pack():
                                             date[5])
 
     local("mkdir -p versions")
-    local("tar cavf versions/{} {}".format(file_tgz, directory))
+    path = local("tar cavf versions/{} {}".format(file_tgz, directory))
+
+    if path.failed:
+        return None
+    else:
+        return file_tgz
