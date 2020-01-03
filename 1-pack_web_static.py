@@ -14,14 +14,14 @@ def do_pack():
         t.now().minute, t.now().second
     ]
     directory = "web_static"
-    file_tgz = "{}_{}0{}0{}{}{}{}.tgz".format(directory,
+    file_tgz = "{}_{}{}{}{}{}{}.tgz".format(directory,
                                               date[0], date[1],
                                               date[2], date[3],
                                               date[4], date[4],
                                               date[5])
 
     local("mkdir -p versions")
-    path = local("tar cavf versions/{} {}".format(file_tgz, directory))
+    path = local("tar -cavf versions/{} {}".format(file_tgz, directory))
 
     if path.failed:
         return None
