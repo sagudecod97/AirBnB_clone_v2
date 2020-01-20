@@ -32,4 +32,4 @@ def python(text):
     txt = text.replace('_', ' ')
     return 'Python {}'.format(txt)
 
-app.run()
+app.run(host='0.0.0.0')

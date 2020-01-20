@@ -10,4 +10,4 @@ app = Flask(__name__)
 def hello():
     """ Prints Hello HBNB """
     return 'Hello HBNB!'
-app.run()
+app.run(host='0.0.0.0')

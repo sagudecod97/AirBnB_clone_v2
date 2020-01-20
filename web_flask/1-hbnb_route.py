@@ -17,4 +17,4 @@ def hbnb():
     """ Prints HBNB """
     return 'HBNB'
 
-app.run()
+app.run(host='0.0.0.0')
