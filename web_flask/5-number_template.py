@@ -42,7 +42,7 @@ def number(n):
 @app.route('/number_template/<int:number>', strict_slashes=False)
 def number_template(number):
     """ Render a template"""
-    return render_template('5-number.html', number=number)
+    return render_template('5-number.html', n=number)
 
 
 if __name__ == "__main__":
