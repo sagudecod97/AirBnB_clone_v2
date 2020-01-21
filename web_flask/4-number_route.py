@@ -38,4 +38,5 @@ def number(n):
     """ Prints with a parameter"""
     return '{} is a number'.format(n)
 
-app.run(host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
