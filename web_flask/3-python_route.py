@@ -32,4 +32,6 @@ def python(text):
     txt = text.replace('_', ' ')
     return 'Python {}'.format(txt)
 
-app.run(host='0.0.0.0')
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
