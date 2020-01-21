@@ -23,4 +23,6 @@ def c(text=None):
     """ Prints with a parameter"""
     txt = text.replace('_', ' ')
     return 'C {}'.format(txt)
-app.run(host='0.0.0.0')
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
