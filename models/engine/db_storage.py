@@ -12,6 +12,7 @@ from models.amenity import Amenity
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import scoped_session
 
+
 class DBStorage:
     """ Class to manage the storage in th DataBase
         Args:
@@ -27,7 +28,7 @@ class DBStorage:
         hst = environ.get('HBNB_MYSQL_HOST')
         db = environ.get('HBNB_MYSQL_DB')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'.
-            format(user, pwd, hst, db), pool_pre_ping=True)
+                                      format(user, pwd, hst, db), pool_pre_ping=True)
         #Base.metadata.create_all(self.__engine)
         #Session = sessionmaker(bind=self.__engine)
         #self.__session = Session()
@@ -35,19 +36,25 @@ class DBStorage:
         if hbnb_env == 'test':
             Base.metadata.drop_all(self.__engine)
 
+    def close(self):
+        self.__session.close()
+
     def all(self, cls=None):
         """ Prints all the objects """
 
-        classes = [State, City, User, Place, Review, Amenity]
+        classes = ["State", "City", "User", "Place", "Review", "Amenity"]
         dict_return = {}
 
         if cls is None:
             for table_name in classes:
-                for table in self.__session.query(table_name).all():
-                    dict_return["{}.{}".format(table_name.__name__, table.id)] = table
+                for table in self.__session.query(eval(table_name)).all():
+                    info = type(table).__name__
+                    dict_return["{}.{}".format(info, table.id)] = table
         else:
-            for table in self.__session.query(cls).all():
-                dict_return["{}.{}".format(cls.__class__, table.id)] = table.to_dict()
+            for table in self.__session.query(eval(cls)).all():
+                info = type(table).__name__
+                dict_return["{}.{}".format(info,
+                            table.id)] = table
 
         return dict_return
 
