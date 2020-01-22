@@ -27,3 +27,6 @@ class State(BaseModel, Base):
                 if self.id == value.state_id:
                     own_city.append(value)
             return own_city
+    else:
+        cities = relationship('City', backref='state_all',
+                              cascade="all, delete")
