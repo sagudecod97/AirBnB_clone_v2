@@ -28,10 +28,8 @@ class DBStorage:
         hst = environ.get('HBNB_MYSQL_HOST')
         db = environ.get('HBNB_MYSQL_DB')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'.
-                                      format(user, pwd, hst, db), pool_pre_ping=True)
-        #Base.metadata.create_all(self.__engine)
-        #Session = sessionmaker(bind=self.__engine)
-        #self.__session = Session()
+                                      format(user, pwd, hst, db),
+                                      pool_pre_ping=True)
         hbnb_env = environ.get('HBNB_ENV')
         if hbnb_env == 'test':
             Base.metadata.drop_all(self.__engine)
@@ -74,6 +72,7 @@ class DBStorage:
     def reload(self):
         """ create all tables in the database """
         Base.metadata.create_all(self.__engine)
-        Session_maker = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session_maker = sessionmaker(bind=self.__engine,
+                                     expire_on_commit=False)
         Session = scoped_session(Session_maker)
         self.__session = Session()
